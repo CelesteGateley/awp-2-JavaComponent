@@ -1,0 +1,9 @@
+name: SpigotPluginManager
+version: ${project.version}
+main: xyz.fluxinc.spigotpluginmanager.SpigotPluginManager
+api-version: 1.13
+prefix: SpigotPM
+softdepend: [zzzzz]
+authors: [CelesteMagisteel]
+description: Server interface for the Spigot Plugin Manager Web App
+website: https://fluxinc.xyz
