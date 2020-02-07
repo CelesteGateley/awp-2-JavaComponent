@@ -42,7 +42,7 @@ public final class SpigotPluginManager extends JavaPlugin {
         variables.add(new BasicNameValuePair("name", descriptionFile.getName()));
 
         if (descriptionFile.getDescription() != null) { variables.add(new BasicNameValuePair("description", descriptionFile.getDescription())); }
-        if (!descriptionFile.getAuthors().isEmpty()) { variables.add(new BasicNameValuePair("authors", String.join(",", descriptionFile.getAuthors()))); }
+        if (!descriptionFile.getAuthors().isEmpty()) { variables.add(new BasicNameValuePair("authors", String.join(", ", descriptionFile.getAuthors()))); }
         if (!descriptionFile.getDepend().isEmpty()) { variables.add(new BasicNameValuePair("dependencies", String.join(", ", descriptionFile.getDepend()))); }
         if (!descriptionFile.getSoftDepend().isEmpty()) { variables.add(new BasicNameValuePair("soft_dependencies", String.join(",", descriptionFile.getSoftDepend()))); }
         if (descriptionFile.getWebsite() != null) { variables.add(new BasicNameValuePair("website", descriptionFile.getWebsite())); }
