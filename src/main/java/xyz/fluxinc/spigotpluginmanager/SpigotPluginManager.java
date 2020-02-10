@@ -7,10 +7,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -20,11 +23,17 @@ public final class SpigotPluginManager extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        File file = new File(getDataFolder(), "config.yml");
+        YamlConfiguration config = new YamlConfiguration();
+        if (!file.exists()) {
+            saveResource("config.yml", false);
+        }
+        try { config.load(file); }
+        catch (InvalidConfigurationException | IOException e) { e.printStackTrace(); getServer().getPluginManager().disablePlugin(this); }
+
         for (Plugin plugin : getServer().getPluginManager().getPlugins()) {
             try {
-                sendRequest("http://127.0.0.1:8000/api",
-                        "VQJJuQ5OW6KHeRoHBBU0iQcljAlGO6R06IK9Srb6SKZI7FdCyQfqGeYfgmzzMnvT",
-                        generateVariables(plugin.getDescription()));
+                sendRequest(config.getString("api-url"), config.getString("token"), generateVariables(plugin.getDescription()));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
