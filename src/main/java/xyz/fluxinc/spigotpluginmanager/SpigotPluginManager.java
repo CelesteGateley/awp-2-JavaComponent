@@ -49,6 +49,7 @@ public final class SpigotPluginManager extends JavaPlugin {
         List<NameValuePair> variables = new ArrayList<>();
 
         variables.add(new BasicNameValuePair("name", descriptionFile.getName()));
+        variables.add(new BasicNameValuePair("version", descriptionFile.getVersion()));
 
         if (descriptionFile.getDescription() != null) { variables.add(new BasicNameValuePair("description", descriptionFile.getDescription())); }
         if (!descriptionFile.getAuthors().isEmpty()) { variables.add(new BasicNameValuePair("authors", String.join(", ", descriptionFile.getAuthors()))); }
